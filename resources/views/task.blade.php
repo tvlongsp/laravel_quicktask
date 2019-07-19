@@ -14,7 +14,14 @@
 
                 <div class="panel-body">
                     <!-- New Task Form -->
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" 
+                        method="post" 
+                        action="{{ route('task.store') }}">
+                        <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                        
+                        @include('common.errors')
+
+                        @include('common.status')
                         
                         <!-- Task Name -->
                         <div class="form-group">
@@ -38,7 +45,7 @@
                                     @lang('app.add_task_btn')
                                 </button>
                             </div>
-                        </div>
+                        </div>                        
                     </form>
                 </div>
             </div>
@@ -56,10 +63,25 @@
                             <th>&nbsp;</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
+                            @foreach ($tasks as $task )                                
+                                <tr>
+                                    <td class="table-text">
+                                        <div>{{ $task->name }}</div>
+                                    </td>
+                                    <td>
+                                        <form method="POST"
+                                            action="{{ route('task.destroy', ['id'=>$task->id]) }}">
+                                            
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            {{ method_field('DELETE')}}
+
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

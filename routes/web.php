@@ -1,4 +1,5 @@
 <?php
+use App\Task;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,6 +12,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('task');
-});
+Route::get('/', 'TasksController@index');
+
+Route::post('/task', 'TasksController@store')
+    ->name('task.store');
+
+Route::delete('/task/{id}', 'TasksController@destroy')
+    ->name('task.destroy');
