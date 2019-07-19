@@ -19,5 +19,6 @@ return [
     'add_task_btn' => 'Add Task',
     'current_task' => 'Current Tasks',
     'new_task_placeholder' => 'Enter a new task',
+    'task_has_been_added' => 'Task :taskname has been saved!',
 
 ];

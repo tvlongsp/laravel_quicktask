@@ -14,7 +14,12 @@
 
                 <div class="panel-body">
                     <!-- New Task Form -->
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="post" action="{{ url('task') }}">
+                        <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+                        
+                        @include('common.errors')
+
+                        @include('common.status')
                         
                         <!-- Task Name -->
                         <div class="form-group">
@@ -38,7 +43,7 @@
                                     @lang('app.add_task_btn')
                                 </button>
                             </div>
-                        </div>
+                        </div>                        
                     </form>
                 </div>
             </div>
